@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>bean & brew - events</title>
+</head>
+<body>
+     <nav>
+            <div class="navbar">
+            <a href="home.html"><img src="logo.png" alt="logo" class = logo></a>
+            <a href="home.html">Home</a>
+            <a href="about us.html">about us</a>
+            <a href="events.html">events</a>
+            <a href="menu.html">menu</a>
+            <a href="booking.html">booking</a>
+            </div>
+     </nav>
+
+     <div class = "event-box1">
+        <img src="cafe valentines event.jpg" alt="valentines themed cafe" class="event-image">
+        <div class = "event-text">
+        <h1>Valentines Day event</h1>
+        <p>At our valentines day event there will a list of local live jazz bands, your ticket will come with a table, free cupcakes, and 20% off drinks</p>
+        </div>
+     </div>
+
+     <div class = "event-box2">
+         <h1>Buy a ticket</h1>
+         <form id="ticketForm">
+            <label for="NumOfTix"> Number of Tickets: </label><br>
+            <input type="number" id="NumOfTix"/>
+            <div id="tixError" class="error"></div>
+
+            <label for="cardNum"> Card Number: </label><br>
+            <input type="text" id="cardNum"/>
+            <div id="cardNumError" class="error"></div>
+
+            <label for="cardName"> Cardholder name:</label><br>
+            <input type="text" id="cardName"/>
+            <div id="nameError" class="error"></div>
+
+            <label for="expDate"> Expiration Date:</label><br>
+            <input type="month" id="expDate"/>
+            <div id="dateError" class="error"></div>
+
+            <label for="CVV"> CVV:</label><br>
+            <input type="string" id="CVV"/>
+            <div id="CVVError" class="error"></div>
+
+            <button type="submit">submit</button>
+            <div id="formMessage"></div>
+         </form>
+     </div>
+
+     <script>
+            const form = document.getElementById('ticketForm');
+            const message = document.getElementById('formMessage');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let valid = true;
+
+                //this is to clear prevention errors
+                document.querySelectorAll('.error').forEach(el => el.textContent ='');
+                message.textContent = '';
+
+                //this is to get values. (.trim remoces any white space the user has entered)
+                const NumOfTix = document.getElementById('NumOfTix').value.trim();
+                const cardNum = document.getElementById('cardNum').value.trim();
+                const cardName = document.getElementById('cardName').value.trim();
+                const expDate = document.getElementById('expDate').value.trim();
+                const CVV = document.getElementById('CVV').value.trim();
+
+                //this is to validate the input
+                if (!NumOfTix || NumOfTix <=0 || NumOfTix >4) {
+                    document.getElementById('tixError').textContent = 'number of tickets is required and maximum 4 per order';
+                    valid = false;
+                }
+                else if (!cardNum || cardNum.length !=16 ) {
+                    document.getElementById('cardNumError').textContent = 'card number is required and must be a valid cardnum';
+                    valid = false;
+                }
+                else if (!cardName) {
+                    document.getElementById('nameError').textContent = 'cardholder name is required';
+                    valid = false;
+                }
+                else if (!expDate) {
+                    document.getElementById('dateError').textContent = 'expiration date is required';
+                    valid = false;
+                }
+                else if (!CVV || CVV.length !=3) {
+                    document.getElementById('CVVError').textContent = 'CVV is required and must be a valid CVV';
+                    valid = false;
+                }
+                else if(valid){
+                    message.textContent = 'ticket successfully purchased, cost: £' + 5*NumOfTix + ' get ticket at the cafe using ur cardholder name';
+                    message.className = 'success';
+                    form.reset();
+                }else{
+                    message.textContent = 'please fix the errors above.';
+                    message.className = 'error';
+                }
+
+            });
+        </script>
+     
+</body>
+<footer>
+    <div class="foot-container">
+        <a href="home.html">
+            <img src="logo.png" alt="logo" class="footlogo">
+        </a> 
+        <p class="footdescription">
+            <strong>Bean and Brew is a cafe based in paisley<br>
+            built on making hungry customers happy</strong>
+        </p>
+    </div>
+
+    <div class="foot-container2a">
+        <p><strong>@BeanAndBrew</strong></p>
+        <div class = "foot-container2b">
+            <a href="https://instagram.com"><img src="ig logo.png" alt="instagram logo" class = logo></a>
+            <a href="https://tiktok.com"><img src="tt logo.png" alt="tiktok logo" class = logo></a>
+            <a href="https://facebook.com"><img src="fb logo.png" alt="facebook logo" class = logo></a>
+            <a href="https://x.com"><img src="x logo.png" alt="x logo" class = logo></a>
+        </div>
+    </div>
+
+    <div class="foot-container3">
+        <p><u><strong>Links:</strong></u></p>
+        <a href="home.html">Home</a>
+        <a href="about us.html">about us</a>
+        <a href="events.html">events</a>
+        <a href="menu.html">menu</a>
+        <a href="booking.html">booking</a>
+    </div>
+</footer>

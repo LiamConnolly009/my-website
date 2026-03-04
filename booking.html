@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>bean & brew - booking</title>
+</head>
+<body>
+     <nav>
+            <div class="navbar">
+            <a href="home.html"><img src="logo.png" alt="logo" class = logo></a>
+            <a href="home.html">Home</a>
+            <a href="about us.html">about us</a>
+            <a href="events.html">events</a>
+            <a href="menu.html">menu</a>
+            <a href="booking.html">booking</a>
+            </div>
+     </nav>
+     <div class="booking-box1">
+        <h1>Book a Table</h1>
+        <form id="ticketForm">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name"/>
+            <div id="nameError" class="error"></div>
+
+            <label for="email">Email:</label><br>
+            <input type="text" id="email"/>
+            <div id="emailError" class="error"></div>
+
+            <label for="date">Date:</label><br>
+            <input type="date" id="date"/>
+            <div id="dateError" class="error"></div>
+
+            <label for="time">Time:</label><br>
+            <input type="time" id="time"/>
+            <div id="timeError" class="error"></div>
+
+            <label for="people">Number of people:</label><br>
+            <input type="number" id="people"/>
+            <div id="peopleError" class="error"></div>
+
+            <button type="submit">Submit</button>
+            <div id="formMessage"></div>
+        </form>
+     </div>
+     <script>
+            const form = document.getElementById('ticketForm');
+            const message = document.getElementById('formMessage');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            let valid = true;
+
+            //this is to clear prevention errors
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+            message.textContent = '';
+
+            //this is to get values. (.trim remoces any white space the user has entered)
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const date = document.getElementById('date').value.trim();
+            const time = document.getElementById('time').value.trim();
+            const people = document.getElementById('people').value.trim();
+
+            //validates email
+            const emailValid = email.includes('@') && email.includes('.');
+
+            //this is to validate the input
+            if (!name) {
+                document.getElementById('nameError').textContent = 'Name is required';
+                valid = false;
+            }
+            else if (!email) {
+                document.getElementById('emailError').textContent = 'Email is required';
+                valid = false;
+            }
+            else if (!emailValid) {
+                document.getElementById('emailError').textContent = 'Email must be a valid email';
+                valid = false;
+            }
+            else if (!date) {
+                document.getElementById('dateError').textContent = 'Date is required';
+                valid = false;
+            }
+            else if (!time) {
+                document.getElementById('timeError').textContent = 'Time is required';
+                valid = false;
+            }
+            else if (!people || people <= 0) {
+                document.getElementById('peopleError').textContent = 'Number of people must be at least 1';
+                valid = false;
+            }
+            else if (valid) {
+                message.textContent = 'Booking successful for ' + people + ' people!';
+                message.className = 'success';
+                form.reset();
+            }else {
+                message.textContent = 'Please fix the errors above.';
+                message.className = 'error';
+            }
+        });
+    </script>
+</body>
+
+<footer>
+    <div class="foot-container">
+        <a href="home.html">
+            <img src="logo.png" alt="logo" class="footlogo">
+        </a> 
+        <p class="footdescription">
+            <strong>Bean and Brew is a cafe based in paisley<br>
+            built on making hungry customers happy</strong>
+        </p>
+    </div>
+
+    <div class="foot-container2a">
+        <p><strong>@BeanAndBrew</strong></p>
+        <div class = "foot-container2b">
+            <a href="https://instagram.com"><img src="ig logo.png" alt="instagram logo" class = logo></a>
+            <a href="https://tiktok.com"><img src="tt logo.png" alt="tiktok logo" class = logo></a>
+            <a href="https://facebook.com"><img src="fb logo.png" alt="facebook logo" class = logo></a>
+            <a href="https://x.com"><img src="x logo.png" alt="x logo" class = logo></a>
+        </div>
+    </div>
+
+    <div class="foot-container3">
+        <p><u><strong>Links:</strong></u></p>
+        <a href="home.html">Home</a>
+        <a href="about us.html">about us</a>
+        <a href="events.html">events</a>
+        <a href="menu.html">menu</a>
+        <a href="booking.html">booking</a>
+    </div>
+</footer>
